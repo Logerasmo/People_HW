@@ -49,7 +49,10 @@ public class Person {
     }
 
     public OptionalInt getAge() {
-        return age;
+        if (hasAge()){
+            return age;
+        }
+        return OptionalInt.empty();
     }
 
     public String getAddress() {

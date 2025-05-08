@@ -19,6 +19,9 @@ public class PersonBuilder {
     }
 
     public PersonBuilder setAge(int age) {
+        if (age < 0 || age > 130) {
+            throw new IllegalArgumentException("Wrong age set");
+        }
         this.age = OptionalInt.of(age);
         return this;
     }
@@ -35,9 +38,6 @@ public class PersonBuilder {
         }
         //Age check
         if (age.isPresent()) {
-            if (age.getAsInt() < 0 || age.getAsInt() > 130) {
-                throw new IllegalArgumentException("Wrong age set");
-            }
             //City check
             if (city != null) {
                 person = new Person(name, surname, age.getAsInt(), city);
@@ -49,8 +49,6 @@ public class PersonBuilder {
         } else {
             person = new Person(name, surname);
         }
-
-
         return person;
     }
 }
